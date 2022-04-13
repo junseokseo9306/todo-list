@@ -6,6 +6,7 @@ import com.team05.todolist.domain.dto.CardDTO;
 import com.team05.todolist.domain.dto.ClassifiedCardsDTO;
 import com.team05.todolist.domain.dto.MoveCardDTO;
 import com.team05.todolist.repository.CardRepository;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -93,10 +94,12 @@ public class CardService {
 
     public ClassifiedCardsDTO findCards() {
         List<Card> cards = cardRepository.findAll();
-		return classifyBySection(cards);
+        ClassifiedCardsDTO classifiedCardsDTO = classifyBySection(cards);
+        classifiedCardsDTO.sort();
+		return classifiedCardsDTO;
     }
 
-	private ClassifiedCardsDTO classifyBySection(List<Card> cards) {
+    private ClassifiedCardsDTO classifyBySection(List<Card> cards) {
         ClassifiedCardsDTO classifiedCards = new ClassifiedCardsDTO();
         List<CardDTO> sectionCards;
         CardDTO cardDto;
