@@ -39,6 +39,8 @@ class TodoCardListAdapter(
 
             binding.tvRemove?.setOnClickListener { // 뒤에 Rmove TextView에 클릭 리스너가 있어서 이 부분은 DragListener가 적용이 되지 않는다 -> 그래서 삭제영역 보이게 스와이프가 가능
                 // 현재 tvRemove에 setOnClickListener가 걸려있어서 카드를 이동하는 경우 tvRemove 부분으로 드래그를 하면 안되고, 나머지 왼쪽 부분으로 하면 드래그가 이루어짐짐
+
+
                 val viewTag =
                     this.itemView.findViewById<ConstraintLayout>(R.id.cvSwipeView).tag as? Boolean
                         ?: false
@@ -173,6 +175,12 @@ class TodoCardListAdapter(
                     return true*/
             }
             MotionEvent.ACTION_MOVE -> {
+                val notify = (view?.parent as RecyclerView).dispatchTouchEvent(event)
+                Log.d("TouchEventTest", "notify : $notify")
+
+                val touch = (view?.parent as RecyclerView).onInterceptTouchEvent(event)
+                Log.d("TouchEventTest", "intercept : $touch")
+
                 Log.d("AppTest", "ACTION_MOVE")
 
                 val isDraggable = if (swipeViewTag != null) {

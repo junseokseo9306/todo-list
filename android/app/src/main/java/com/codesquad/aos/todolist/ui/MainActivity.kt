@@ -7,6 +7,7 @@ import android.graphics.RectF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
@@ -67,6 +68,17 @@ class MainActivity : AppCompatActivity(), DataChangeListener {
 
         // 시작 시 전체 데이터 가져오기
         viewModel.getCardItems()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        Log.d("TouchEventTest", "called dispatchTouchEvent() in MainActivity")
+        return super.dispatchTouchEvent(ev)
+    }
+
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        Log.d("TouchEventTest", "called onTouchEvent() in MainActivity")
+        return super.onTouchEvent(event)
     }
 
     // 할 일 전용
